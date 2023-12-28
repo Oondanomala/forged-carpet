@@ -16,6 +16,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.network.play.client.CPacketChatMessage;
 import net.minecraft.network.play.client.CPacketPlayerDigging;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumActionResult;
@@ -272,7 +273,12 @@ public class EntityPlayerActionPack
     {
         player.dismountRidingEntity();
     }
-    
+
+    public void say(String message)
+    {
+        player.connection.processChatMessage(new CPacketChatMessage(message));
+    }
+
     public void onUpdate()
     {
         if (doesJump)
